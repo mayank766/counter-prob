@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { DeadlineCountdownComponent } from './deadline-countdown.component';
+import { DeadlineCountdownComponent } from './pages/deadline-countdown/deadline-countdown.component';
 
 @Component({
   selector: 'app-root',
