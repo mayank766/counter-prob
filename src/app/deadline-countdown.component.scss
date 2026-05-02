@@ -1,0 +1,113 @@
+
+.deadline-card {
+  border-radius: 1.25rem;
+  padding: 2rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8ff 100%);
+  box-shadow: 0 22px 70px rgba(17, 24, 39, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.header-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  color: #4f46e5;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+h2 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.05;
+}
+
+.intro {
+  margin: 1.5rem 0 2rem;
+  color: #475569;
+  line-height: 1.75;
+}
+
+.meter,
+.placeholder {
+  min-height: 9rem;
+  display: grid;
+  place-content: center;
+  border-radius: 1rem;
+  background: #eef2ff;
+  border: 1px solid rgba(99, 102, 241, 0.18);
+}
+
+.value {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #0f172a;
+}
+
+.note {
+  margin-top: 0.5rem;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.primary {
+  border: 0;
+  background: #4338ca;
+  color: white;
+  border-radius: 0.95rem;
+  min-width: 12rem;
+  padding: 0.95rem 1.3rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary:hover:not(:disabled) {
+  background: #3730a3;
+}
+
+.status {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0 1rem 0;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 999px;
+  border: 0.2rem solid rgba(59, 130, 246, 0.2);
+  border-top-color: #2563eb;
+  animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

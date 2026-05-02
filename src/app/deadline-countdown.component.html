@@ -1,0 +1,44 @@
+<section class="deadline-card">
+  <div class="header-block">
+    <h2>Seconds left to deadline</h2>
+    <div class="actions">
+        <button
+        type="button"
+        class="primary"
+        (click)="start()"
+        [disabled]="loading() || isRunning()"
+        >
+        @if (loading()) {
+            Starting...
+        } @else {
+            {{ isRunning() ? 'Running' : 'Start countdown' }}
+        }
+        </button>
+
+        @if (error()) {
+        <span class="status">{{ error() }}</span>
+        }
+    </div>
+  </div>
+
+  <p class="intro">
+    Tap the button to load the latest deadline from the backend. A short 2-second loader simulates the start delay before the timer begins.
+  </p>
+
+  
+  @if (loading()) {
+    <div class="loader">
+      <span class="spinner"></span>
+      Loading deadline…
+    </div>
+  }
+
+  @if (secondsLeft() !== null) {
+    <div class="meter">
+      <span class="value">{{ secondsLeft() }}</span>
+      <span class="note">seconds remaining</span>
+    </div>
+  } @else {
+    <div class="placeholder">Ready when you are.</div>
+  }
+</section>
