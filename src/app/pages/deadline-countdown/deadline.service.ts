@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 interface DeadlineResponse {
   secondsLeft: number;
@@ -15,6 +15,12 @@ export class DeadlineApiService {
   getSecondsLeft(): Observable<number> {
     return this.#http
       .get<DeadlineResponse>('/api/deadline')
-      .pipe(map((response) => response.secondsLeft));
+      .pipe(
+        map((response) => response.secondsLeft),
+        catchError((error) => {
+          console.error('Failed to fetch deadline:', error);
+          return throwError(() => error);
+        })
+      );
   }
 }
