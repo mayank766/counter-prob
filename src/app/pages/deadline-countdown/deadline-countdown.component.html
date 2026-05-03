@@ -14,10 +14,6 @@
             {{ isRunning() ? 'Running' : 'Start countdown' }}
         }
         </button>
-
-        @if (error()) {
-        <span class="status">{{ error() }}</span>
-        }
     </div>
   </div>
 
@@ -31,6 +27,10 @@
       <span class="spinner"></span>
       Loading deadline…
     </div>
+  }
+
+  @if (error()) {
+    <div class="status">{{ error() }}</div>
   }
 
   @if (isRunning()) {

@@ -37,6 +37,11 @@ export class DeadlineCountdownComponent {
       .subscribe({
         next: (deadline) => {
           this.loading.set(false);
+          if (deadline == null || typeof deadline !== 'number' || deadline < 0 ) {
+            this.error.set('Invalid deadline received from server.');
+            console.log(this.error());
+            return;
+          }
           this.secondsLeft.set(deadline);
           this.isRunning.set(true);
           this.startCountdown(deadline);
