@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DeadlineApiService } from './deadline.service';
-import { interval, Subject, takeUntil } from 'rxjs';
+import { interval, map, Subject, takeUntil, takeWhile, timer } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -15,7 +15,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class DeadlineCountdownComponent {
   readonly #deadlineApi = inject(DeadlineApiService);
   readonly #destroyRef = inject(DestroyRef);
-  readonly #countdownStop$ = new Subject<void>();
 
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
@@ -52,23 +51,18 @@ export class DeadlineCountdownComponent {
   startCountdown(initialSeconds: number): void {
     let remaining = initialSeconds;
 
-    interval(1000)
+    timer(0, 1000)
       .pipe(
-        takeUntil(this.#countdownStop$),
+        map((elapsed) => remaining - elapsed),
+        takeWhile((timeLeft) => timeLeft >= 0),
         takeUntilDestroyed(this.#destroyRef)
       )
-      .subscribe(() => {
-        remaining--;
+      .subscribe((timeLeft) => {
+        this.secondsLeft.set(timeLeft);
 
-        // Stop and clean up when countdown reaches 0
-        if (remaining <= 0) {
+        if (timeLeft === 0) {
           this.isRunning.set(false);
-          this.secondsLeft.set(null);
-          this.#countdownStop$.next(); // Stop the interval completely
-          return;
         }
-
-        this.secondsLeft.set(remaining);
       });
   }
 }

@@ -33,7 +33,7 @@
     </div>
   }
 
-  @if (secondsLeft() !== null) {
+  @if (isRunning()) {
     <div class="meter">
       <span class="value">{{ secondsLeft() }}</span>
       <span class="note">seconds remaining</span>
